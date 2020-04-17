@@ -9,7 +9,7 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     // directional input variables
-    public float xThrow, zThrow;
+    [HideInInspector]public float xDirection, zDirection;
 
     void Update()
     {
@@ -21,7 +21,7 @@ public class PlayerInput : MonoBehaviour
      */
     void ProcessDirection()
     {
-        xThrow = Input.GetAxisRaw("Horizontal");
-        zThrow = Input.GetAxisRaw("Vertical");
+        xDirection = Input.GetAxisRaw("Horizontal");
+        zDirection = Input.GetAxisRaw("Vertical");
     }
 }

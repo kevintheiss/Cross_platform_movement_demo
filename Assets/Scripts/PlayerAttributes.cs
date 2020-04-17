@@ -8,5 +8,5 @@ using UnityEngine;
 public class PlayerAttributes : MonoBehaviour
 {
     // movement speed
-    [Tooltip("In ms^-1")] public float speed = 4f;
+    [Tooltip("In ms^-1")] public float speed = 200f;
 }
