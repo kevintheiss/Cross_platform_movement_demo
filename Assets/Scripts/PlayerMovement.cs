@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /*
  * This class handles player movement based on directional inputs
@@ -39,17 +37,17 @@ public class PlayerMovement : MonoBehaviour
 
         if(xMove != 0f && zMove != 0f)
         {
-            rigidBody.velocity = new Vector3(xMove * playerAttributes.speed, 0f, zMove * playerAttributes.speed);
+            rigidBody.velocity = new Vector3(xMove * playerAttributes.moveSpeed, 0f, zMove * playerAttributes.moveSpeed);
         }
 
         if(xMove != 0f && zMove == 0f)
         {
-            rigidBody.velocity = new Vector3(xMove * playerAttributes.speed, 0f, 0f);
+            rigidBody.velocity = new Vector3(xMove * playerAttributes.moveSpeed, 0f, 0f);
         }
 
         if (xMove == 0f && zMove != 0f)
         {
-            rigidBody.velocity = new Vector3(0f, 0f, zMove * playerAttributes.speed);
+            rigidBody.velocity = new Vector3(0f, 0f, zMove * playerAttributes.moveSpeed);
         }
     }
 }

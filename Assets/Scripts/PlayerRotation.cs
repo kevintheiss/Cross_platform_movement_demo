@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CameraRotation : MonoBehaviour
+public class PlayerRotation : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
