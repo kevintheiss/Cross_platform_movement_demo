@@ -9,8 +9,8 @@ public class PlayerInput : MonoBehaviour
     // directional input variables
     [HideInInspector] public float xDirection, zDirection;
 
-    // rotation input variables
-    [HideInInspector] public float xRotation, yRotation;
+    // rotation vector
+    [HideInInspector] public Vector3 rotation = Vector3.zero;
 
     void Update()
     {
@@ -32,7 +32,7 @@ public class PlayerInput : MonoBehaviour
      */
     void ProcessRotation()
     {
-        yRotation += Input.GetAxisRaw("Mouse X");
-        xRotation += -Input.GetAxisRaw("Mouse Y");
+        rotation.y += Input.GetAxisRaw("Mouse X");
+        rotation.x += -Input.GetAxisRaw("Mouse Y");
     }
 }
