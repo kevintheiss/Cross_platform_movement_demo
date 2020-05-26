@@ -28,7 +28,7 @@ public class PlayerRotation : MonoBehaviour
     void RotatePlayer()
     {
         rigidBody.freezeRotation = false;
-        transform.eulerAngles = new Vector3(0f, playerInput.rotation.y, 0f) * playerAttrubutes.playerLookSpeed;
+        transform.eulerAngles = new Vector3(0f, playerInput.rotation.y, 0f) * playerAttrubutes.lookSpeed;
         rigidBody.freezeRotation = true;
     }
 }

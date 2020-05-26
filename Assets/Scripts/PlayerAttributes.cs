@@ -5,6 +5,7 @@
  */
 public class PlayerAttributes : MonoBehaviour
 {
-    [Tooltip("In ms^-1")] public float playerMoveSpeed = 200f; // player movement speed
-    [Tooltip("In ms^-1")] public float playerLookSpeed = 150f; // player look speed
+    // movement speed
+    [Tooltip("In ms^-1")] public float moveSpeed = 200f;
+    [Tooltip("In ms^-1")] public float lookSpeed = 150f;
 }
