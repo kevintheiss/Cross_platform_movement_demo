@@ -190,7 +190,7 @@ InputManager:
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
-    dead: 0.19
+    dead: 1
     sensitivity: 1
     snap: 0
     invert: 1
@@ -295,10 +295,10 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Jump
-    descriptiveName: 
+    descriptiveName: XBOX gamepad controller jump input
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 3
+    positiveButton: joystick button 0
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000

@@ -6,7 +6,7 @@
 public class PlayerRotation : MonoBehaviour
 {
     // player script variables
-    PlayerAttributes playerAttrubutes;
+    PlayerAttributes playerAttributes;
     PlayerInput playerInput;
 
     Rigidbody rigidBody;
@@ -14,7 +14,7 @@ public class PlayerRotation : MonoBehaviour
     // Initialization
     void Awake()
     {
-        playerAttrubutes = GetComponent<PlayerAttributes>();
+        playerAttributes = GetComponent<PlayerAttributes>();
         playerInput = GetComponent<PlayerInput>();
         rigidBody = GetComponent<Rigidbody>();
     }
@@ -28,7 +28,7 @@ public class PlayerRotation : MonoBehaviour
     void RotatePlayer()
     {
         rigidBody.freezeRotation = false;
-        transform.eulerAngles = new Vector3(0f, playerInput.rotation.y, 0f) * playerAttrubutes.lookSpeed;
+        transform.eulerAngles = new Vector3(0f, playerInput.rotation.y, 0f) * playerAttributes.lookSpeed;
         rigidBody.freezeRotation = true;
     }
 }

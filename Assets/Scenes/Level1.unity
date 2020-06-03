@@ -592,7 +592,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330156257}
-  m_LocalRotation: {x: 0.08936896, y: 0.000000010582983, z: 0.00000007732875, w: 0.9959986}
+  m_LocalRotation: {x: 0.08936896, y: 0.000000010584195, z: 0.000000077328636, w: 0.9959986}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1164,7 +1164,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825268374}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.155977, y: 2, z: -5.9}
+  m_LocalPosition: {x: -1.75, y: 2, z: -5.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1478315791}
@@ -1280,8 +1280,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.08936897, y: 0.000000035329318, z: -0.0000000031700291, w: 0.9959986}
-  m_LocalPosition: {x: -8.155977, y: 2, z: -5.9}
+  m_LocalRotation: {x: 0.08936897, y: 0.00000003532993, z: -0.000000003170084, w: 0.9959986}
+  m_LocalPosition: {x: -1.75, y: 2, z: -5.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1387,7 +1387,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1130411191}
-  m_LocalRotation: {x: 0.07128539, y: 0.000000014040062, z: 0.000000049735856, w: 0.997456}
+  m_LocalRotation: {x: 0.07128539, y: -0.000000021335623, z: 0.000000052264056, w: 0.997456}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1607,10 +1607,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1844769076}
   - component: {fileID: 1844769081}
-  - component: {fileID: 1844769080}
   - component: {fileID: 1844769079}
   - component: {fileID: 1844769078}
   - component: {fileID: 1844769077}
+  - component: {fileID: 1844769080}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1626,7 +1626,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844769075}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.155977, y: 0.25, z: 2.1}
+  m_LocalPosition: {x: -1.75, y: 0.25, z: 2.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2114759595}
@@ -1646,6 +1646,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c661c30fcad8ea5498d55a6780c864d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gravityScale: 5
+  controller: {fileID: 1844769080}
+  cam: {fileID: 963194228}
+  turnSmoothTime: 0.1
 --- !u!114 &1844769078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1658,9 +1662,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 768c4a802ec92a546a73ff393a4cc34b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDirection: 0
-  zDirection: 0
+  horizontal: 0
+  vertical: 0
   rotation: {x: 0, y: 0, z: 0}
+  jump: 0
 --- !u!114 &1844769079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1673,24 +1678,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 907faeb3fb67cfd4aa6507403587bf17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 200
-  lookSpeed: 150
---- !u!54 &1844769080
-Rigidbody:
+  moveSpeed: 10
+  lookSpeed: 6
+  jumpForce: 25
+--- !u!143 &1844769080
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844769075}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &1844769081
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1700,7 +1708,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1844769075}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2.1107354
   m_Direction: 1
