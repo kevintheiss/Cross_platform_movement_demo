@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         MovePlayer();
-        RotatePlayer();
+        //RotatePlayer();
     }
 
     /*
@@ -45,9 +45,13 @@ public class PlayerMovement : MonoBehaviour
     {
         moveDirection = new Vector3(playerInput.horizontal * playerAttributes.moveSpeed, moveDirection.y, playerInput.vertical * playerAttributes.moveSpeed);
 
-        if(controller.isGrounded && playerInput.jump)
+        if(controller.isGrounded)
         {
-            moveDirection.y = playerAttributes.jumpForce;
+            moveDirection.y = 0f;
+            if (playerInput.jump)
+            {
+                moveDirection.y = playerAttributes.jumpForce;
+            }
         }
 
         moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
@@ -76,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
         }*/
     }
 
-    void RotatePlayer()
+    /*void RotatePlayer()
     {
         Vector3 lookDirection = new Vector3(playerInput.horizontal, 0f, playerInput.vertical).normalized;
 
@@ -87,5 +91,5 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0f, smoothAngle, 0f);
         }
-    }
+    }*/
 }

@@ -10,7 +10,9 @@ public class PlayerInput : MonoBehaviour
     [HideInInspector] public float horizontal, vertical;
 
     // rotation vector
-    [HideInInspector] public Vector3 rotation = Vector3.zero;
+    //[HideInInspector] public Vector3 rotation = Vector3.zero;
+
+    [HideInInspector] public float rotateHorz, rotateVert;
 
     // jump input
     [HideInInspector] public bool jump;
@@ -18,7 +20,7 @@ public class PlayerInput : MonoBehaviour
     void Update()
     {
         ProcessMovement();
-        //ProcessRotation();
+        ProcessRotation();
     }
 
     /*
@@ -36,7 +38,9 @@ public class PlayerInput : MonoBehaviour
      */
     void ProcessRotation()
     {
-        rotation.y += Input.GetAxisRaw("Mouse X");
-        rotation.x += -Input.GetAxisRaw("Mouse Y");
+        rotateHorz = Input.GetAxisRaw("Mouse X");
+        rotateVert = Input.GetAxisRaw("Mouse Y");
+        //rotation.y += Input.GetAxisRaw("Mouse X");
+        //rotation.x += -Input.GetAxisRaw("Mouse Y");
     }
 }

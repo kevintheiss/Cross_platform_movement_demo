@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+﻿//using UnityEngine;
 
 /*
  * This class handles player rotation based on mouse movement and gamepad directional inputs
  */
-public class PlayerRotation : MonoBehaviour
+/*public class PlayerRotation : MonoBehaviour
 {
     // player script variables
     PlayerAttributes playerAttributes;
@@ -32,3 +32,4 @@ public class PlayerRotation : MonoBehaviour
         rigidBody.freezeRotation = true;
     }
 }
+*/
