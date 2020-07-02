@@ -43,7 +43,10 @@ public class PlayerMovement : MonoBehaviour
      */
     void MovePlayer()
     {
-        moveDirection = new Vector3(playerInput.horizontal * playerAttributes.moveSpeed, moveDirection.y, playerInput.vertical * playerAttributes.moveSpeed);
+        //moveDirection = new Vector3(playerInput.horizontal * playerAttributes.moveSpeed, moveDirection.y, playerInput.vertical * playerAttributes.moveSpeed);
+
+        moveDirection = (transform.forward * playerInput.vertical) + (transform.right * playerInput.horizontal);
+        moveDirection = moveDirection.normalized * playerAttributes.moveSpeed;
 
         if(controller.isGrounded)
         {

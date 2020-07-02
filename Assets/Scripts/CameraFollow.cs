@@ -18,6 +18,8 @@ public class CameraFollow : MonoBehaviour
 
     private PlayerInput playerInput;
 
+    [SerializeField] Transform pivot;
+
     void Awake()
     {
         playerInput = player.GetComponent<PlayerInput>();
@@ -35,6 +37,11 @@ public class CameraFollow : MonoBehaviour
         {
             offset = target.position - transform.position;
         }
+
+        pivot.transform.position = target.transform.position;
+        pivot.transform.parent = target.transform;
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     /*
@@ -52,12 +59,17 @@ public class CameraFollow : MonoBehaviour
         target.Rotate(0f, horizontal, 0f);
 
         float vertical = playerInput.rotateVert * rotateSpeed;
-        target.Rotate(vertical, 0f, 0f);
+        pivot.Rotate(vertical, 0f, 0f);
 
-        float targetXAngle = target.eulerAngles.x;
+        float targetXAngle = pivot.eulerAngles.x;
         float targetYAngle = target.eulerAngles.y;
         Quaternion rotation = Quaternion.Euler(targetXAngle, targetYAngle, 0f);
         transform.position = target.position - (rotation * offset);
+
+        if(transform.position.y < target.position.y)
+        {
+            transform.position = new Vector3(transform.position.x, target.position.y - 0.5f, transform.position.z);
+        }
 
         transform.LookAt(target);
     }
