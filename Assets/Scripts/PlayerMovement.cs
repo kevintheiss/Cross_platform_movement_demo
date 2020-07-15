@@ -18,9 +18,9 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
 
     [SerializeField] Transform cam;
-    [SerializeField] float turnSmoothTime = 0.1f;
+    //[SerializeField] float turnSmoothTime = 0.1f;
 
-    float turnSmoothVelocity;
+    //float turnSmoothVelocity;
 
     // Initialization
     void Awake()
@@ -43,18 +43,19 @@ public class PlayerMovement : MonoBehaviour
      */
     void MovePlayer()
     {
-        //moveDirection = new Vector3(playerInput.horizontal * playerAttributes.moveSpeed, moveDirection.y, playerInput.vertical * playerAttributes.moveSpeed);
+        moveDirection = new Vector3(playerInput.horizontal * playerAttributes.moveSpeed, moveDirection.y, playerInput.vertical * playerAttributes.moveSpeed);
 
-        moveDirection = (transform.forward * playerInput.vertical) + (transform.right * playerInput.horizontal);
-        moveDirection = moveDirection.normalized * playerAttributes.moveSpeed;
+        //moveDirection = (transform.forward * playerInput.vertical * playerAttributes.moveSpeed) + (transform.right * playerInput.horizontal * playerAttributes.moveSpeed);
+        //moveDirection = moveDirection.normalized * playerAttributes.moveSpeed;
 
-        if(controller.isGrounded)
+        if(controller.isGrounded && moveDirection.y < 0f)
         {
             moveDirection.y = 0f;
-            if (playerInput.jump)
-            {
-                moveDirection.y = playerAttributes.jumpForce;
-            }
+        }
+
+        if (playerInput.jump && controller.isGrounded)
+        {
+            moveDirection.y = playerAttributes.jumpForce;
         }
 
         moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);

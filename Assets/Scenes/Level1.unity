@@ -330,7 +330,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170989116}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -713,7 +713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1844769076}
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: -5, z: -10}
   useOffsetValues: 0
   rotateSpeed: 2
   player: {fileID: 1844769075}
@@ -893,10 +893,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c661c30fcad8ea5498d55a6780c864d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityScale: 5
-  controller: {fileID: 1844769080}
+  gravityScale: 3
+  controller: {fileID: 0}
   cam: {fileID: 963194228}
-  turnSmoothTime: 0.1
 --- !u!114 &1844769078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -928,7 +927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   lookSpeed: 6
-  jumpForce: 20
+  jumpForce: 15
 --- !u!143 &1844769080
 CharacterController:
   m_ObjectHideFlags: 0
