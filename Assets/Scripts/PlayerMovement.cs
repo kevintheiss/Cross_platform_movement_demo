@@ -65,36 +65,39 @@ public class PlayerMovement : MonoBehaviour
 
         // horizontal and forward movement over time
         float xMove = playerInput.horizontal * Time.fixedDeltaTime;
-        float zMove = playerInput.vertical * Time.fixedDeltaTime;
+        //float zMove = playerInput.vertical * Time.fixedDeltaTime;
 
         // if the player's input is diagonal, move diagonally in that direction
-        if(xMove != 0f && zMove != 0f)
-        {
-            rigidBody.velocity = new Vector3(xMove * playerAttributes.moveSpeed, 0f, zMove * playerAttributes.moveSpeed);
-        }
-
-        // if the player's input is left or right, move in that direction
-        if(xMove != 0f && zMove == 0f)
+        if(xMove != 0f)// && zMove != 0f)
         {
             rigidBody.velocity = new Vector3(xMove * playerAttributes.moveSpeed, 0f, 0f);
         }
 
+        // if the player's input is left or right, move in that direction
+        /*if(xMove != 0f && zMove == 0f)
+        {
+            rigidBody.velocity = new Vector3(xMove * playerAttributes.moveSpeed, 0f, 0f);
+        }*/
+
         // if the player's input is up or down, move forward on up input, and backward on down input
-        if (xMove == 0f && zMove != 0f)
+        /*if (xMove == 0f )
         {
             rigidBody.velocity = new Vector3(0f, 0f, zMove * playerAttributes.moveSpeed);
-        }
+        }*/
     }
 
     void RotatePlayer()
     {
-        Vector3 lookDirection = new Vector3(playerInput.horizontal, 0f, playerInput.vertical).normalized;
+        rigidBody.freezeRotation = true;
+
+        Vector3 lookDirection = new Vector3(playerInput.horizontal, 0f, 0f).normalized;
 
         float targetAngle = Mathf.Atan2(lookDirection.x, lookDirection.z) * Mathf.Rad2Deg;
         float smoothAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 
         if(lookDirection.magnitude >= 0.1f)
         {
+            rigidBody.freezeRotation = false;
             transform.rotation = Quaternion.Euler(0f, smoothAngle, 0f);
         }
     }

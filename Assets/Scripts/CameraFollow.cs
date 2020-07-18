@@ -10,28 +10,28 @@ public class CameraFollow : MonoBehaviour
     //[SerializeField] float moveSpeed = 10f; // speed of camera movement
     [SerializeField] Vector3 offset; // camera position in relation to target
 
-    [SerializeField] bool useOffsetValues;
+    //[SerializeField] bool useOffsetValues;
 
-    [SerializeField] float rotateSpeed = 0f;
+    //[SerializeField] float rotateSpeed = 0f;
 
-    [SerializeField] GameObject player;
+    //[SerializeField] GameObject player;
 
-    private PlayerInput playerInput;
+    //private PlayerInput playerInput;
 
-    [SerializeField] Transform pivot;
+   // [SerializeField] Transform pivot;
 
-    void Awake()
+    /*void Awake()
     {
         playerInput = player.GetComponent<PlayerInput>();
-        SetOffset();
-    }
+        //SetOffset();
+    }*/
 
     void LateUpdate()
     {
         CameraMove();
     }
 
-    void SetOffset()
+    /*void SetOffset()
     {
         if (!useOffsetValues)
         {
@@ -42,18 +42,18 @@ public class CameraFollow : MonoBehaviour
         pivot.transform.parent = target.transform;
 
         Cursor.lockState = CursorLockMode.Locked;
-    }
+    }*/
 
     /*
      * Move the camera behind the player
      */
-    /*void CameraMove()
+    void CameraMove()
     {
         transform.position = target.position - offset;
         transform.LookAt(target);
-    }*/
+    }
 
-    void CameraMove()
+    /*void CameraMove()
     {
         float horizontal = playerInput.rotateHorz * rotateSpeed;
         target.Rotate(0f, horizontal, 0f);
@@ -72,5 +72,5 @@ public class CameraFollow : MonoBehaviour
         }
 
         transform.LookAt(target);
-    }
+    }*/
 }
