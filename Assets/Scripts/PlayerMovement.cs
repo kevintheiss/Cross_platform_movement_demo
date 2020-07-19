@@ -13,11 +13,13 @@ public class PlayerMovement : MonoBehaviour
     //private Vector3 moveDirection;
     //public float gravityScale = 1f;
 
+    private Vector3 jumpVector;
+
     Rigidbody playerRigidBody;
 
     //public CharacterController controller;
 
-    [SerializeField] Transform cam;
+    //[SerializeField] Transform cam;
   //  [SerializeField] float turnSmoothTime = 0.1f;
 
     //float turnSmoothVelocity;
@@ -28,13 +30,18 @@ public class PlayerMovement : MonoBehaviour
         playerAttributes = GetComponent<PlayerAttributes>();
         playerInput = GetComponent<PlayerInput>();
         playerRigidBody = GetComponent<Rigidbody>();
+        jumpVector = new Vector3(0f, playerAttributes.jumpHeight, 0f);
         //controller = GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         PlayerMove();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         PlayerJump();
         //PlayerRotate();
     }
@@ -68,16 +75,17 @@ public class PlayerMovement : MonoBehaviour
         // horizontal and forward movement over time
         //float xMove = playerInput.horizontal * Time.fixedDeltaTime;
         Vector3 moveVector = new Vector3(playerInput.horizontal, 0.0f, playerInput.vertical);
-        moveVector = moveVector.normalized * playerAttributes.moveSpeed;
+        transform.Translate(moveVector.normalized * playerAttributes.moveSpeed * Time.deltaTime);
+
         //moveVector.y = playerRigidBody.velocity.y;
-        playerRigidBody.velocity = moveVector;
+        //playerRigidBody.velocity = moveVector;
         //float zMove = playerInput.vertical * Time.fixedDeltaTime;
 
         // if the player's input is diagonal, move diagonally in that direction
-        if(playerInput.horizontal != 0f)// && zMove != 0f)
+        /*if(playerInput.horizontal != 0f)// && zMove != 0f)
         {
             playerRigidBody.AddForce(moveVector, ForceMode.Impulse); //= new Vector3(xMove * playerAttributes.moveSpeed, 0f, 0f);
-        }
+        }*/
 
         // if the player's input is left or right, move in that direction
         /*if(xMove != 0f && zMove == 0f)
@@ -97,25 +105,23 @@ public class PlayerMovement : MonoBehaviour
          playerAttributes.isGrounded = true;
      }*/
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision other)
     {
-        if(collision.gameObject.tag == "Ground")
+        if(other.gameObject.tag == "Ground")
         {
             playerAttributes.isGrounded = true;
-            playerRigidBody.velocity = Vector3.zero;
-            playerRigidBody.angularVelocity = Vector3.zero;
+            //playerRigidBody.velocity = Vector3.zero;
+            //playerRigidBody.angularVelocity = Vector3.zero;
         }
     }
 
     void PlayerJump()
     {
-        if (!playerAttributes.isGrounded)
-            return;
-
-        if(playerInput.jump)
+        if(playerInput.jump && playerAttributes.isGrounded)
         {
-            playerRigidBody.velocity = new Vector3(playerRigidBody.velocity.x, 0f, playerRigidBody.velocity.z);
-            playerRigidBody.AddForce(0f, playerAttributes.jumpForce, 0f, ForceMode.Impulse);
+            //playerRigidBody.velocity = new Vector3(playerRigidBody.velocity.x, 0f, playerRigidBody.velocity.z);
+            playerRigidBody.AddForce(jumpVector * playerAttributes.jumpForce, ForceMode.Impulse);
+            playerAttributes.isGrounded = false;
         }
     }
 
