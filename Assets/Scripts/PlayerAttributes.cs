@@ -6,7 +6,8 @@
 public class PlayerAttributes : MonoBehaviour
 {
     // movement speed
-    [Tooltip("In ms^-1")] public float moveSpeed = 10f;
+    [Tooltip("In ms^-1")] public float moveSpeed = 500f;
     //[Tooltip("In ms^-1")] public float lookSpeed = 6f;
     [Tooltip("In ms^-1")] public float jumpForce = 20f;
+    [HideInInspector] public bool isGrounded;
 }

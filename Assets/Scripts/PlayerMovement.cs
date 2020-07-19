@@ -13,35 +13,36 @@ public class PlayerMovement : MonoBehaviour
     //private Vector3 moveDirection;
     //public float gravityScale = 1f;
 
-    Rigidbody rigidBody;
+    Rigidbody playerRigidBody;
 
     //public CharacterController controller;
 
     [SerializeField] Transform cam;
-    [SerializeField] float turnSmoothTime = 0.1f;
+  //  [SerializeField] float turnSmoothTime = 0.1f;
 
-    float turnSmoothVelocity;
+    //float turnSmoothVelocity;
 
     // Initialization
     void Awake()
     {
         playerAttributes = GetComponent<PlayerAttributes>();
         playerInput = GetComponent<PlayerInput>();
-        rigidBody = GetComponent<Rigidbody>();
+        playerRigidBody = GetComponent<Rigidbody>();
         //controller = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        MovePlayer();
-        RotatePlayer();
+        PlayerMove();
+        PlayerJump();
+        //PlayerRotate();
     }
 
     /*
      * Move the player based on directional inputs
      */
-    void MovePlayer()
+    void PlayerMove()
     {
         //moveDirection = new Vector3(playerInput.horizontal * playerAttributes.moveSpeed, moveDirection.y, playerInput.vertical * playerAttributes.moveSpeed);
 
@@ -61,16 +62,21 @@ public class PlayerMovement : MonoBehaviour
         moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
         controller.Move(moveDirection * Time.deltaTime);*/
 
-        rigidBody.velocity = Vector3.zero;
+        // playerRigidBody.velocity = Vector3.zero;
+        
 
         // horizontal and forward movement over time
-        float xMove = playerInput.horizontal * Time.fixedDeltaTime;
+        //float xMove = playerInput.horizontal * Time.fixedDeltaTime;
+        Vector3 moveVector = new Vector3(playerInput.horizontal, 0.0f, playerInput.vertical);
+        moveVector = moveVector.normalized * playerAttributes.moveSpeed;
+        //moveVector.y = playerRigidBody.velocity.y;
+        playerRigidBody.velocity = moveVector;
         //float zMove = playerInput.vertical * Time.fixedDeltaTime;
 
         // if the player's input is diagonal, move diagonally in that direction
-        if(xMove != 0f)// && zMove != 0f)
+        if(playerInput.horizontal != 0f)// && zMove != 0f)
         {
-            rigidBody.velocity = new Vector3(xMove * playerAttributes.moveSpeed, 0f, 0f);
+            playerRigidBody.AddForce(moveVector, ForceMode.Impulse); //= new Vector3(xMove * playerAttributes.moveSpeed, 0f, 0f);
         }
 
         // if the player's input is left or right, move in that direction
@@ -86,7 +92,34 @@ public class PlayerMovement : MonoBehaviour
         }*/
     }
 
-    void RotatePlayer()
+    /* void OnCollisionStay()
+     {
+         playerAttributes.isGrounded = true;
+     }*/
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Ground")
+        {
+            playerAttributes.isGrounded = true;
+            playerRigidBody.velocity = Vector3.zero;
+            playerRigidBody.angularVelocity = Vector3.zero;
+        }
+    }
+
+    void PlayerJump()
+    {
+        if (!playerAttributes.isGrounded)
+            return;
+
+        if(playerInput.jump)
+        {
+            playerRigidBody.velocity = new Vector3(playerRigidBody.velocity.x, 0f, playerRigidBody.velocity.z);
+            playerRigidBody.AddForce(0f, playerAttributes.jumpForce, 0f, ForceMode.Impulse);
+        }
+    }
+
+    /*void PlayerRotate()
     {
         rigidBody.freezeRotation = true;
 
@@ -100,5 +133,5 @@ public class PlayerMovement : MonoBehaviour
             rigidBody.freezeRotation = false;
             transform.rotation = Quaternion.Euler(0f, smoothAngle, 0f);
         }
-    }
+    }*/
 }
