@@ -9,18 +9,15 @@ public class PlayerInput : MonoBehaviour
     // directional input variables
     [HideInInspector] public float horizontal, vertical;
 
-    // rotation vector
-    //[HideInInspector] public Vector3 rotation = Vector3.zero;
-
-    [HideInInspector] public float rotateHorz, rotateVert;
-
     // jump input
     [HideInInspector] public bool jump;
 
+    /*
+     * Update is called once per frame
+     */
     void Update()
     {
         ProcessMovement();
-        ProcessRotation();
     }
 
     /*
@@ -31,16 +28,5 @@ public class PlayerInput : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
         jump = Input.GetButtonDown("Jump");
-    }
-
-    /*
-     * Process the player mouse rotation inputs and update the values
-     */
-    void ProcessRotation()
-    {
-        rotateHorz = Input.GetAxisRaw("Mouse X");
-        rotateVert = Input.GetAxisRaw("Mouse Y");
-        //rotation.y += Input.GetAxisRaw("Mouse X");
-        //rotation.x += -Input.GetAxisRaw("Mouse Y");
     }
 }

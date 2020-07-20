@@ -1,27 +1,31 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
+/*
+ * This class is attached to an invisible cube with a box collider under the stage
+ * When the player falls off the stage and hits the collider, reset the level
+ */
 public class ResetTrigger : MonoBehaviour
 {
+    // access the game manager
     private GameManager gameManager;
 
-    // Start is called before the first frame update
+    /*
+     * Initialization
+     */
     void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
     }
 
+    /*
+     * Check for collisions
+     */
     void OnCollisionEnter(Collision other)
     {
+        // if the player collides with the reset trigger...
         if(other.gameObject.tag == "Player")
         {
-            gameManager.ResetLevel();
+            gameManager.ResetLevel(); // reset the level
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
