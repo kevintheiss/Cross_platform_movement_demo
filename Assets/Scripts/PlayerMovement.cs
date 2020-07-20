@@ -105,23 +105,23 @@ public class PlayerMovement : MonoBehaviour
          playerAttributes.isGrounded = true;
      }*/
 
-    void OnCollisionEnter(Collision other)
+    /*void OnCollisionEnter()
     {
-        if(other.gameObject.tag == "Ground")
+        if(playerRigidBody.velocity.y == 0f)
         {
             playerAttributes.isGrounded = true;
             //playerRigidBody.velocity = Vector3.zero;
             //playerRigidBody.angularVelocity = Vector3.zero;
         }
-    }
+    }*/
 
     void PlayerJump()
     {
-        if(playerInput.jump && playerAttributes.isGrounded)
+        if(playerInput.jump && playerRigidBody.velocity.y == 0f)
         {
             //playerRigidBody.velocity = new Vector3(playerRigidBody.velocity.x, 0f, playerRigidBody.velocity.z);
             playerRigidBody.AddForce(jumpVector * playerAttributes.jumpForce, ForceMode.Impulse);
-            playerAttributes.isGrounded = false;
+            //playerAttributes.isGrounded = false;
         }
     }
 
