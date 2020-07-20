@@ -1,4 +1,4 @@
-# Platforming_demo
+# Cross_platform_movement_demo
 Basic one-level platforming movement/collision demo using cross-platform input in Unity
 
 # Keyboard Controls
